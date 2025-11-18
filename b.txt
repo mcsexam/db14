@@ -1,1 +1,12 @@
+Create Sample Nodes 
+CREATE (:Scholarship {name:"XYZ", category:"OBC", income_limit:300000}), (:Scholarship {name:"ABC", category:"SC", income_limit:400000}), (:Student {name:"Rohan", year:"2020-21"}), (:Student {name:"Sneha", year:"2020-21"}), (:Student {name:"Ajay", year:"2021-22"});
 
+Queries
+
+a) Display names of scholarship schemes where category = OBC MATCH (s:Scholarship {category:"OBC"}) RETURN s.name;
+
+b) Count number of students benefited from scholarship "XYZ" during year "2020-21" MATCH (st:Student {year:"2020-21"})-[:BENEFITTED]->(s:Scholarship {name:"XYZ"}) RETURN count(st);
+
+c) Update income limit of scholarship "XYZ" MATCH (s:Scholarship {name:"XYZ"}) SET s.income_limit = 500000;
+
+d) Display scholarship having highest number of beneficiaries MATCH (st:Student)-[:BENEFITTED]->(s:Scholarship) RETURN s.name, count(st) AS total ORDER BY total DESC LIMIT 1;
